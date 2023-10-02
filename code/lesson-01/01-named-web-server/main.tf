@@ -13,6 +13,12 @@ provider "aws" {
   region = "us-east-2"
 }
 
+locals {
+  name = "nddg-example"
+  port = 8080
+}
+
+
 resource "aws_instance" "example" {
   ami                    = "ami-0fb653ca2d3203ac1"
   instance_type          = "t2.micro"
@@ -21,23 +27,23 @@ resource "aws_instance" "example" {
   user_data = <<-EOF
               #!/bin/bash
               echo "Hello, Eric!" > index.html
-              nohup busybox httpd -f -p 8080 &
+              nohup busybox httpd -f -p ${local.port} &
               EOF
 
   user_data_replace_on_change = true
 
   tags = {
-    Name = "nddg-example"
+    Name = local.name
   }
 }
 
 resource "aws_security_group" "instance" {
 
-  name = "nddg-example-sg"
+  name = "${local.name}-sg"
 
   ingress {
-    from_port   = 8080
-    to_port     = 8080
+    from_port   = local.port
+    to_port     = local.port
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
