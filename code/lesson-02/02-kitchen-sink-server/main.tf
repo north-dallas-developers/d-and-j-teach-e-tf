@@ -1,6 +1,7 @@
 locals {
   project_name = random_pet.pet.id
-  port         = 8080
+  server_port  = 8080
+  ssh_port     = 22
 }
 
 module "bucket" {
@@ -57,12 +58,18 @@ module "server" {
 
   dynamo_table_arn = module.dynamo.arn
   s3_arn           = module.bucket.arn
-  busy_box_port    = local.port
+  busy_box_port    = local.server_port
 
   ingress_rules = {
     "Serve http port" = {
-      from_port   = local.port
-      to_port     = local.port
+      from_port   = local.server_port
+      to_port     = local.server_port
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+    "Allow SSH" = {
+      from_port   = local.ssh_port
+      to_port     = local.ssh_port
       protocol    = "tcp"
       cidr_blocks = ["0.0.0.0/0"]
     }
