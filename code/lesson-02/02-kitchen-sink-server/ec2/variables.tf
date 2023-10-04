@@ -53,3 +53,21 @@ variable "user_data_replace_on_change" {
   type        = bool
   default     = true
 }
+
+variable "algorithm" {
+  description = "The algorithm used to generate the key"
+  type        = string
+  default     = "RSA"
+}
+
+variable "filename" {
+  description = "The filename in which to store the ky locally"
+  type        = string
+  default     = "mykey.pem"
+}
+
+variable "file_permission" {
+  description = "The numeric representation of the file permission"
+  type        = number
+  default     = 400
+}
