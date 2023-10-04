@@ -12,7 +12,7 @@ Before attending this presentation, please ensure that you have the following to
 
 - **AWS CLI**: If you plan to work with AWS resources during the presentation, install the AWS Command Line Interface by following this guide: [AWS CLI Installation](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 
-- **Set AWS AK/SK**: Set the AWS Access Key ID and Secret Access Key environment variables to authenticate with AWS cli
+- **Set AWS AK/SK**: Set the AWS Access Key ID and Secret Access Key environment variables to authenticate with AWS cli. To get these, choose `Security credentials` in the upper-right-hand menu, and then on that page you can click `Create access key`. You will see the two keys when you create them.
 ```bash
 export AWS_ACCESS_KEY_ID=<your access key id>
 export AWS_SECRET_ACCESS_KEY=<your secret key>
